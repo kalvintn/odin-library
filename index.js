@@ -1,8 +1,20 @@
+// main variables
 const myLibrary = [];
 let library = document.querySelector(".library");
 let modal = document.querySelector("#myModal");
 let modalButton = document.querySelector("#modalButton");
-let span = document.getElementsByClassName("close")[0]; // close modal
+let span = document.getElementsByClassName("close")[0]; // close modal [X]
+let submit = document.querySelector("#submit");
+
+
+
+// dummy books
+addBookToLibrary("Our Tragic Universe", "Scarlett Thomas", 428, false);
+addBookToLibrary("Quicksand", "Junichiro Tanizaki", 240, false);
+addBookToLibrary("Mansfield Park", "Jane Austen", 384, true);
+addBookToLibrary("The Woods", "Harlan Coben", 528, true);
+createCards();
+
 
 
 // main constructor
@@ -23,43 +35,46 @@ function Book(title, author, pageCount, readYet){
 
 
 
+
+
 function addBookToLibrary(title, author, pageCount, readYet){
     let newBook = new Book(title, author, pageCount, readYet);
     myLibrary.push(newBook);
+    // regenerate cards
+    createCards();
 }
 
 
 
-// dummy books
-addBookToLibrary("Our Tragic Universe", "Scarlett Thomas", 428, false);
-addBookToLibrary("Quicksand", "Junichiro Tanizaki", 240, false);
-addBookToLibrary("Mansfield Park", "Jane Austen", 384, true);
-addBookToLibrary("The Woods", "Harlan Coben", 528, true);
 
 
+function createCards(){
+    // reset library contents
+    library.innerHTML = "";
 
-// Create cards for each book object
-for(let i = 0; i < myLibrary.length; i++){
-    let card = document.createElement("div");
-    card.className = "card";
+    // generate cards for each myLibrary[] Book
+    for(let i = 0; i < myLibrary.length; i++){
+        let card = document.createElement("div");
+        card.className = "card";
 
-    // Add book properties to card (excluding id)
-    let keys = Object.keys(myLibrary[i]);
-    let values = Object.values(myLibrary[i]);
-    for(let j = 1; j < values.length; j++){
-        let property = document.createElement("p");
-        property.className = keys[j];   // classname=keyname for CSS styling
-        property.innerText = values[j];
-        card.appendChild(property);
+        // Add book properties to card (excluding id)
+        let keys = Object.keys(myLibrary[i]);
+        let values = Object.values(myLibrary[i]);
+        for(let j = 1; j < values.length; j++){
+            let property = document.createElement("p");
+            property.className = keys[j];   // classname=keyname for CSS styling
+            property.innerText = values[j];
+            card.appendChild(property);
+        }
+
+        library.appendChild(card);
     }
-
-    library.appendChild(card);
 }
 
 
 
 
-/* Modal */
+/* MODAL */
 
 // open modal
 modalButton.onclick = function() { 
@@ -75,5 +90,33 @@ span.onclick = function(){
 window.onclick = function(){
     if(event.target == modal){
         modal.style.display = "none";
+    }
+}
+
+// handle form
+submit.onclick = function(event){
+    event.preventDefault();
+
+    let title = document.getElementById("title");
+    let author = document.getElementById("author");
+    let pageCount = document.getElementById("pageCount");
+    let readYet = document.querySelector("input[name='read']:checked");
+
+    // Basic error check: all fields nonempty
+    let empty = false;
+    if(title.value == "" || author.value == "" || pageCount.value == "" || readYet.value === null){
+        empty = true;
+        alert("Some fields are empty. Please try again.");
+    }
+
+    // Create element in library
+    if(!empty){
+        (readYet.value == "Yes") ? readYet = true : readYet = false;
+
+        let newBook = new Book(title.value, author.value, pageCount.value, readYet);
+        addBookToLibrary(title.value, author.value, pageCount.value, readYet);
+
+        // close modal
+        modal.style.display = "none"; 
     }
 }

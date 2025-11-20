@@ -51,7 +51,9 @@ h1 {
 .pageCount::after {
     content: " pages";
 }
-
+.read-options {
+  text-align: left;
+}
 
 
 

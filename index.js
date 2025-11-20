@@ -1,6 +1,8 @@
 const myLibrary = [];
 let library = document.querySelector(".library");
-
+let modal = document.querySelector("#myModal");
+let modalButton = document.querySelector("#modalButton");
+let span = document.getElementsByClassName("close")[0]; // close modal
 
 
 // main constructor
@@ -56,3 +58,22 @@ for(let i = 0; i < myLibrary.length; i++){
 
 
 
+
+/* Modal */
+
+// open modal
+modalButton.onclick = function() { 
+    modal.style.display = "block"; 
+};
+
+// close modal button
+span.onclick = function(){ 
+    modal.style.display = "none"; 
+};
+
+// click outside = close modal
+window.onclick = function(){
+    if(event.target == modal){
+        modal.style.display = "none";
+    }
+}

@@ -1,8 +1,18 @@
+/* global styles */
+:root {
+    --main-color: #664228;
+    --secondary-color: #946E4A;
+    --accent-color: #7D5839;
+}
 * {
     font-family: "Be Vietnam Pro", sans-serif;
     padding: 0;
     margin: 0;
     box-sizing: border-box;
+}
+body {
+    color: white;
+    background-color: var(--main-color);
 }
 
 
@@ -10,4 +20,41 @@
 h1 {
     text-align: center;
     padding: 1em;
+}
+.library {
+    display: grid;
+    grid-template-rows: auto; /* default : auto */
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    gap: 1.5em;
+    margin: 1.5em;
+}
+.card {
+    background-color: var(--secondary-color);
+    text-align: center;
+    padding: 1.5em;
+    border: 5px solid var(--accent-color);
+    border-radius: 1em;
+}
+.title {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin-bottom: 0.5em;
+}
+.author {
+    font-style: italic;
+    margin-bottom: 1.0em;
+}
+.pageCount::after {
+    content: " pages";
+}
+
+
+
+/* Responsiveness */
+/* Typically: min-width is mobile-first, max-width is desktop-first */
+@media (max-width:801px)  { 
+    .library { grid-template-columns: 1fr 1fr 1fr; }
+}
+@media (max-width:480px){ 
+    .library { grid-template-columns: 1fr 1fr; }
 }

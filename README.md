@@ -1,5 +1,5 @@
 # Description
-Creation of a Library App of independent Book items. HTML/CSS page skeleton with JavaScript objects, constructors, and methods for creating books to add to the collection.
+Creation of a Library App of independent Book items. HTML/CSS page skeleton with JavaScript objects, constructors, prototypes, and methods. Functionalities include adding books, removing books, and toggling read status.
 
 # Author
 Kalvin Nguyen &copy; 2025.  

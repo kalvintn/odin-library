@@ -8,12 +8,16 @@ let submit = document.querySelector("#submit");
 
 
 
+
+
 // dummy books
 addBookToLibrary("Our Tragic Universe", "Scarlett Thomas", 428, false);
 addBookToLibrary("Quicksand", "Junichiro Tanizaki", 240, false);
 addBookToLibrary("Mansfield Park", "Jane Austen", 384, true);
 addBookToLibrary("The Woods", "Harlan Coben", 528, true);
 createCards();
+
+
 
 
 
@@ -47,12 +51,11 @@ function addBookToLibrary(title, author, pageCount, readYet){
 
 
 
-
+// Generate library display
 function createCards(){
     // reset library contents
     library.innerHTML = "";
 
-    // generate cards for each myLibrary[] Book
     for(let i = 0; i < myLibrary.length; i++){
         let card = document.createElement("div");
         card.className = "card";
@@ -74,14 +77,14 @@ function createCards(){
         removeButton.addEventListener("click", () => handleRemoveClick(card));
         card.appendChild(removeButton);
 
-        // Add change read button
+        // Add toggle read status button
         let readButton = document.createElement("button");
         readButton.innerHTML = "Toggle Read Status";
         readButton.className = "readButton";
         readButton.addEventListener("click", () => handleToggleRead(card));
         card.appendChild(readButton);
 
-        card.dataset.id = values[0];    // set card data-id = "UUID" for deletion
+        card.dataset.id = values[0];    // set card data-id = "UUID" for easy deletion
         library.appendChild(card);
     }
 }
@@ -89,26 +92,29 @@ function createCards(){
 
 
 
-/* MODAL */
 
-// open modal
+// Open Modal
 modalButton.onclick = function() { 
     modal.style.display = "block"; 
 };
 
-// close modal button
+// Close Modal
 span.onclick = function(){ 
     modal.style.display = "none"; 
 };
 
-// click outside = close modal
+// Click Outside -> Close Modal
 window.onclick = function(){
     if(event.target == modal){
         modal.style.display = "none";
     }
 }
 
-// handle form
+
+
+
+
+// Handle form data
 submit.onclick = function(event){
     event.preventDefault();
 
@@ -138,7 +144,9 @@ submit.onclick = function(event){
 
 
 
-// Remove a Book instance from Library
+
+
+// Remove Button (a Book instance from Library)
 function handleRemoveClick(card){
     // Use UUID to remove 
     let id = card.dataset.id;
@@ -154,7 +162,23 @@ function handleRemoveClick(card){
 
 
 
-// Toggle Read on Book instance
+
+
+// Toggle Read Status Prototype
+Book.prototype.toggleReadStatus = function(){
+    if(this.readYet == "Read."){
+        this.readYet = "Not read yet.";
+    } else {
+        this.readYet = "Read.";
+    }
+    return this.readYet;
+}
+
+
+
+
+
+// Toggle Read Status on Book instance
 function handleToggleRead(card){
     let cardID = card.dataset.id;
     let book = myLibrary.find(book => book.id == cardID);
@@ -168,12 +192,5 @@ function handleToggleRead(card){
 
 
 
-// Toggle Read Status Prototype
-Book.prototype.toggleReadStatus = function(){
-    if(this.readYet == "Read."){
-        this.readYet = "Not read yet.";
-    } else {
-        this.readYet = "Read.";
-    }
-    return this.readYet;
-}
+
+

@@ -18,6 +18,8 @@ body {
 
 
 
+
+/* Cards, Buttons */
 h1 {
     text-align: center;
     text-shadow: 3px 3px 10px #848484;
@@ -94,7 +96,6 @@ h1 {
     border-radius: 10px;
     margin-bottom: 2em;
 }
-
 .modal {
   display: none; /* Hidden by default */
   position: fixed;
@@ -108,8 +109,6 @@ h1 {
   background-color: rgb(0,0,0); /* Fallback color */
   background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
 }
-
-/* Modal Content */
 .modal-content {
   position: relative;
   background-color: #fefefe;
@@ -122,33 +121,28 @@ h1 {
   animation-name: animatetop;
   animation-duration: 0.4s;
 }
-
-/* Add Animation */
+/* Modal Animations */
 @-webkit-keyframes animatetop {
   from {top:-300px; opacity:0} 
   to {top:0; opacity:1}
 }
-
 @keyframes animatetop {
   from {top:-300px; opacity:0}
   to {top:0; opacity:1}
 }
-
-/* The Close Button */
+/* The Close button */
 .close {
   color: white;
   float: right;
   font-size: 28px;
   font-weight: bold;
 }
-
 .close:hover,
 .close:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
 }
-
 .modal-header {
   padding: 2px 16px;
   background-color: var(--accent-color);
@@ -161,7 +155,7 @@ h1 {
 
 
 
-/* form */
+/* Form within Modal */
 form {
     color: black;
     display: grid;
@@ -180,7 +174,6 @@ input[type="submit"] {
     border: 3px solid var(--main-color);
     border-radius: 7px;
 }
-
 
 
 

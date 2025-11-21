@@ -182,8 +182,10 @@ input[type="submit"] {
 /* Responsiveness */
 /* Typically: min-width is mobile-first, max-width is desktop-first */
 @media (max-width:801px)  { 
-    .library { grid-template-columns: 1fr 1fr 1fr; }
+  .modal-content { width: 60%; }
+  .library { grid-template-columns: 1fr 1fr 1fr; }
 }
 @media (max-width:480px){ 
-    .library { grid-template-columns: 1fr 1fr; }
+  .modal-content { width: 80%; }
+  .library { grid-template-columns: 1fr 1fr; }
 }

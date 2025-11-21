@@ -74,6 +74,13 @@ function createCards(){
         removeButton.addEventListener("click", () => handleRemoveClick(card));
         card.appendChild(removeButton);
 
+        // Add change read button
+        let readButton = document.createElement("button");
+        readButton.innerHTML = "Toggle Read Status";
+        readButton.className = "readButton";
+        readButton.addEventListener("click", () => handleToggleRead(card));
+        card.appendChild(readButton);
+
         card.dataset.id = values[0];    // set card data-id = "UUID" for deletion
         library.appendChild(card);
     }
@@ -143,4 +150,30 @@ function handleRemoveClick(card){
 
     // Reload library
     createCards();
+}
+
+
+
+// Toggle Read on Book instance
+function handleToggleRead(card){
+    let cardID = card.dataset.id;
+    let book = myLibrary.find(book => book.id == cardID);
+
+    // Call prototype function
+    book.toggleReadStatus();
+
+    // Reload Display
+    createCards();
+}
+
+
+
+// Toggle Read Status Prototype
+Book.prototype.toggleReadStatus = function(){
+    if(this.readYet == "Read."){
+        this.readYet = "Not read yet.";
+    } else {
+        this.readYet = "Read.";
+    }
+    return this.readYet;
 }

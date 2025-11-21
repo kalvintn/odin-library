@@ -62,11 +62,19 @@ function createCards(){
         let values = Object.values(myLibrary[i]);
         for(let j = 1; j < values.length; j++){
             let property = document.createElement("p");
-            property.className = keys[j];   // classname=keyname for CSS styling
+            property.className = keys[j];       // classname=keyname for CSS styling
             property.innerText = values[j];
             card.appendChild(property);
         }
 
+        // Add remove button
+        let removeButton = document.createElement("button");
+        removeButton.innerHTML = "Remove";
+        removeButton.className = "removeButton";
+        removeButton.addEventListener("click", () => handleRemoveClick(card));
+        card.appendChild(removeButton);
+
+        card.dataset.id = values[0];    // set card data-id = "UUID" for deletion
         library.appendChild(card);
     }
 }
@@ -119,4 +127,20 @@ submit.onclick = function(event){
         // close modal
         modal.style.display = "none"; 
     }
+}
+
+
+
+// Remove a Book instance from Library
+function handleRemoveClick(card){
+    // Use UUID to remove 
+    let id = card.dataset.id;
+    for(let i = 0; i < myLibrary.length; i++){
+        if(id == myLibrary[i].id){
+            myLibrary.splice(i, 1);
+        }
+    }
+
+    // Reload library
+    createCards();
 }
